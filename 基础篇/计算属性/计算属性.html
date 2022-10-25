@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<body>
+    <div id="demo">
+      {{text}}<br>
+      <!--虽然这样可以,但使用计算属性能更方便阅读,且单行表达式容易变的臃肿 -->
+      {{text.split(',').reverse().join(',')}}<br>
+      <!--计算属性 -->
+      {{reverseText}}<br>
+    </div>
+</body>
+<script>
+    //需求:123,456,789编程789,456,123
+    var app=new Vue({
+        el:'#demo',
+        data:{
+            text:'123,456,789'
+        },
+        //定义计算属性
+        computed:{
+            reverseText:function(){
+              return this.text.split(',').reverse().join(',');
+            }
+        }
+
+    })
+</script>
+</html>
