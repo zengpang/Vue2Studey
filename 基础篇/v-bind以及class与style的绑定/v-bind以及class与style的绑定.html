@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>v-bind以及class与style的绑定</title>
+</head>
+<body>
+    <div id="app">
+      <a  :href="url">我是B站</a>
+      <img :src="imgUrl" alt="">
+    </div>
+</body>
+<script>
+   var app=new Vue({
+     el:"#app",
+     data:{
+        url:'https://www.bilibili.com/?spm_id_from=333.976.0.0',
+        imgUrl:'https://baike.baidu.com/pic/%E6%9D%A5%E8%87%AA%E6%B7%B1%E6%B8%8A/20304552/1/f703738da9773912395fdf39f7198618367ae269?fr=lemma&fromModule=lemma_top-image&ct=single#aid=1&pic=f703738da9773912395fdf39f7198618367ae269'
+     }
+   })
+</script>
+</html>
