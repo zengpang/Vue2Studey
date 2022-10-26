@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>绑定内联样式</title>
+    <title>作业3绑定内联样式</title>
 </head>
 
 <body>
-    绑定内联样式:键代表style的属性值，值就代表属性对应的值了<br>
+  
     <div id="app">
-        <div v-bind:style="{'color':color,'font-size':fontSize+'px'}">
-            大家看看这里
+        <div v-bind:style="{'color':color,'font-size':fontSize+'px','width':width+'px','height':height+'px','background-color':bcolor}">
+            绑定内联样式示例
         </div>
     </div>
 </body>
@@ -23,7 +23,10 @@
         el: "#app",
         data: {
             color: 'red',
-            fontSize: 24
+            fontSize: 24,
+            width:150,
+            height:150,
+            bcolor:'black'
         }
     })
 </script>
