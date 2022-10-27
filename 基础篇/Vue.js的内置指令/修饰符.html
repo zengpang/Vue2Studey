@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>修饰符</title>
+</head>
+<body>
+    <div id="app">
+       <hr>
+       stop用法：<br>
+       <div @click="divclick" style="height: 100px;width:100px;background-color:blue">
+           <!--加入.stop阻止冒泡,阻止触发div的点击事件-->
+           <button @click.stop="btnclick">点击</button>
+       </div>
+       <hr>
+       prevent的用法：
+       每次提交表单
+       <!--提交表单事件设置，然后加入prevent可使其提交的时候不重载页面-->
+       <form action="" @submit.prevent="hangle">
+          <button type="submit">提交表单</button>
+       </form>
+       <hr>
+       once:<br>
+       <button @click="onceMethod">执行无限次</button>
+       <button @click.once="onceMethod">只执行一次</button>
+       <hr>
+       监听键盘事件：
+       <br>
+        <!--@keyup键盘事件，后接13为修饰符代表限定监听键位为enter键-->
+       <input @keyup.13="submitMe">
+    </div>
+   
+</body>
+<script>
+    var app=new Vue({
+        el:'#app',
+        data:{
+            count:0
+        },
+        methods:{
+           divclick:function(){
+              alert('div被点击了');
+           },
+           btnclick:function(){
+             alert('Button被点击了');
+           },
+           hangle:function()
+           {
+            alert('我不重载了，页面也不刷新了');
+           },
+           onceMethod:function(){
+             alert('多少次？');
+           },
+           submitMe:function(){
+            alert('您按下了enter键');
+           }
+        }
+    })
+</script>
+</html>

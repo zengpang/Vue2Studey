@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染指令</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<body>
+    <div id="app">
+        v-if后接的是等号：等号后的内容必须是布尔值<br>
+        v-id的基本用法：
+        <p v-if="6<3">{{apple}}</p>
+        <p v-else-if="9>5">{{pineapple}}</p>
+        <p v-else>{{banana}}</p>
+        v-if的实例用法:
+        需求：点击按钮
+        <div v-if="type==='name'">
+            用户名:<input type="text" placeholder="请输入用户名" >
+        </div>
+        <div v-else>
+            密码:<input type="text" placeholder="请输入密码">
+        </div>
+        <button @click="toggleType">点击切换</button>
+    </div>
+</body>
+<script>
+    var app=new Vue({
+        el:"#app",
+        data:{
+            apple:'apple',
+            banana:"banana",
+            pineapple:"pineapple",
+            type:'name'
+        },
+        methods:{
+            toggleType:function(){
+                //三目运算符
+              this.type=(this.type==='name'?'password':'name')
+            }
+        }
+    })
+</script>
+</html>

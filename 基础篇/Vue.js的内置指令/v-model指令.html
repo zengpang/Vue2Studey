@@ -5,19 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <title>数组更新</title>
+    <title>v-model指令</title>
 </head>
 <body>
     <div id="app">
-       <div v-for="study in arr">{{study}}</div>
+       <input type="text" v-model="msg">
+       <h2>{{msg}}</h2>
     </div>
 </body>
 <script>
-   var app=new Vue({
-     el:"#app",
-     data:{
-        arr:['book','pen','pencil']
-     }
-   })
+    new Vue({
+        el:"#app",
+        data:{
+            msg:'hello'
+        }
+    })
 </script>
 </html>

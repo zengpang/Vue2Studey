@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>作业3v-bind，v-on</title>
+</head>
+<style>
+    .normal{
+        width: 100px;
+        height: 100px;
+    }
+    .oN{
+      background-color: red;   
+    }
+    .oFF{
+        background-color: blue;
+    }
+</style>
+<body>
+    <div id="app">
+        <div v-bind:class="{normal:true,oN:isoN,oFF:isoFF}"></div>
+       <button v-on:click="clickEvent">点击更换样式</button>
+    </div>
+</body>
+<script>
+   var app=new Vue({
+    el:'#app',
+    data:{
+       isoN:true,
+       isoFF:false
+    },
+    methods:{
+        clickEvent:function(){
+           this.isoFF=this.isoN;
+           this.isoN=!this.isoN;
+        }
+    }
+   })
+</script>
+</html>
