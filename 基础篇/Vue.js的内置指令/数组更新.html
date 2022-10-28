@@ -10,6 +10,13 @@
 <body>
     <div id="app">
        <div v-for="study in arr">{{study}}</div>
+       <button @click="sortArr">点击排序</button>
+       <button @click="reveserArr">点击排序</button>
+       <button @click="changeOne">点击修改</button>
+       <button @click="changeArrLength">点击修改长度</button>
+       <hr>
+       返回字符串中含有oo的项:
+       {{matchOO}}
     </div>
 </body>
 <script>
@@ -17,6 +24,34 @@
      el:"#app",
      data:{
         arr:['book','pen','pencil']
+     },
+     computed:{
+        matchOO:function(){
+          //参数代表要过滤的每一项
+          return this.arr.filter(function(book){
+             return book.match(/oo/);
+          });
+        }
+     },
+     methods:{
+      sortArr:function(){
+         this.arr.sort(function(a,b){
+            //从小到大
+            return a.length-b.length;
+         })
+      },
+      reveserArr:function(){
+         this.arr.reverse();
+      },
+      //改变数组的指定项
+      changeOne:function(){
+         Vue.set(app.arr,0,"car");
+      },
+      //改变数组的长度
+      changeArrLength:function(){
+         this.arr.splice(2);
+      },
+      
      }
    })
 </script>

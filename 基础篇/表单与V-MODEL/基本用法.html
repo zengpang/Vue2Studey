@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>基本用法</title>
+</head>
+<body>
+    <div id="app">
+         v-model的用法:<br>
+         <hr>
+         input和textarea
+        <input type="text" v-model="value"><br>
+        {{value}}
+        <br>
+        <textarea name="" id="" cols="30" rows="10" v-model="msg">我是多行文本的初始化值</textarea>
+        <br>{{msg}}
+        <hr>
+        单选框:<br>
+        单个单选框: <input type="radio" name="" v-bind:checked="oneradio">
+        多个单选框：
+        猫蛋：<input type="radio" name="checks" value="猫蛋" v-model="checkname">
+        狗蛋：<input type="radio" name="checks" value="狗蛋" v-model="checkname">
+        翠花：<input type="radio" name="checks" value="翠花" v-model="checkname"><br>
+        现在选中的是：{{checkname}}<br>
+        <hr>
+        复选框:
+        <!--v-bind是单向绑定，元素变化不会修改变量，而v-model是双向绑定，元素变化会修改变量-->
+        单个复选框---用v-bind：<input type="checkbox" v-bind:checked="oneradio">
+        单个复选框---用v-model：<input type="checkbox" v-model="oneradio">
+        <br>-------------
+        多个复选框：
+        猫蛋：<input type="checkbox" value="猫蛋" v-model="checks">
+        狗蛋：<input type="checkbox" value="狗蛋" v-model="checks">
+        翠花：<input type="checkbox" value="翠花" v-model="checks">
+        <br>现在选中了{{checks}}
+        <br>-----------<br>
+        单选的下拉框:
+        <select v-model="selected">
+            <option value="猫蛋">猫蛋</option>
+            <option value="狗蛋">狗蛋</option>
+            <option value="翠花">翠花</option>
+        </select>
+        <br>现在选中了{{selected}}<br>
+        多选的下拉框:
+        <!--多选添加multiple-->
+        <select v-model="selecteds" multiple>
+            <option value="猫蛋">猫蛋</option>
+            <option value="狗蛋">狗蛋</option>
+            <option value="翠花">翠花</option>
+        </select>
+        <br>现在选中了{{selecteds}}<br>
+        <hr style="color:darkred">
+        绑定值:<br>
+        单选按钮:
+        <input type="radio" v-model="picked" v-bind:value="value">----{{picked}}
+        <br>-------<br>
+        复选框：--选中和不选中的value不一样
+        <input type="checkbox" v-model="toggle" :true-value="value1" :false-value="value2">
+        <br>
+        {{toggle}}<br>
+        被选中： {{toggle== value1}}<br>
+        =未被选中：{{toggle==value2}}<br>
+        <br>-------------<br>
+        下拉框:
+        <!--在select标签上绑定value值对option并没有影响-->
+        <select v-model="valueselect" >
+            <option value="猫蛋" :value="{num:111}">猫蛋</option>
+            <option value="狗蛋">狗蛋</option>
+            <option value="翠花">翠花</option>
+        </select>--------------现在选中的是{{typeof valueselect}}
+        <br>----------<br>
+        修饰符：
+        <input type="text" v-model="inputStr1">-----{{typeof inputStr1}}<br>
+        <input type="text" v-model.lazy="inputStr2">-----{{inputStr2}}<br>
+        <input type="text" v-model.number="inputStr3">-----{{typeof inputStr3}}<br>
+        <input type="text" v-model.trim="inputStr4">-----{{inputStr4.split('').length}}<br>
+    </div>
+</body>
+<script>
+    var app=new Vue({
+        el:'#app',
+        data:{
+            value:'',
+            msg:'',
+            oneradio:false,
+            checkname:'猫蛋',
+            checks:[],
+            //无论字符串还是数组都像，如果是单选下拉框绑定的话
+            selected:'',
+            selecteds:[],
+            picked:true,
+            value:'111',
+            toggle:'',
+            value1:'hellovalue1',
+            value2:'hellovalue2',
+            valueselect:'',
+            inputStr1:'',
+            inputStr2:'',
+            inputStr3:'',
+            inputStr4:''
+        }
+    })
+</script>
+</html>

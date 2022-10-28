@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <title>基本指令</title>
+    <title>V-model作业2单选框</title>
 </head>
-<style>
-    [v-cloak]:{
-        display: none;
-    }
-</style>
+
 <body>
     <div id="app">
-        <hr>
-        v-cloak:<br>
-        <p v-cloak>{{msg}}</p>
-        <hr>
-        v-once:<br>
-        <span v-once>{{oncedata}}</span>
+        <input type="checkbox" value="苹果" v-model="isSelected">苹果<br>
+  
+        {{isSelected}}<br>
     </div>
 </body>
 <script>
-    
-    var app= new Vue({
-        el:'#app',
-        data:{
-            msg:'helloWorld',
-            oncedata:'一次渲染'
+    var app = new Vue({
+        el: '#app',
+        data: {
+            isSelected:false
         }
     })
 </script>
+
 </html>

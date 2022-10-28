@@ -17,10 +17,10 @@
         v-if的实例用法:
         需求：点击按钮
         <div v-if="type==='name'">
-            用户名:<input type="text" placeholder="请输入用户名" >
+            用户名:<input type="text" placeholder="请输入用户名" key="name">
         </div>
         <div v-else>
-            密码:<input type="text" placeholder="请输入密码">
+            密码:<input type="text" placeholder="请输入密码" key="pwd">
         </div>
         <button @click="toggleType">点击切换</button>
     </div>

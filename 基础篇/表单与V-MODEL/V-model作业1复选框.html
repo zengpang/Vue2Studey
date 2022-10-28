@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>V-model作业1复选框</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="checkbox" value="苹果" v-model="checkeds">苹果<br>
+        <input type="checkbox" value="李子" v-model="checkeds">李子<br>
+        <input type="checkbox" value="西瓜" v-model="checkeds">西瓜<br>
+        {{checkeds}}<br>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+           checkeds:[]
+        }
+    })
+</script>
+
+</html>
