@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>自定义事件--子组件给父组件传递数据</title>
+</head>
+
+<body>
+   <div id="app">
+       您现在的银行卡余额是{{total}}元<br>
+      <btn-component @btnchange="totalmatch"></btn-component>
+   </div>
+</body>
+<script>
+    Vue.component("btn-component", {
+        props: ['myMsg'],
+        template: `<div>
+                    <button @click="handleincrease">+1000</button>
+                    <button @click="handlereduce">-1000</button>
+                   </div>`,
+       data:function(){
+        return {
+           count:2000
+        }
+       },
+       methods:{
+        handleincrease:function()
+        {
+            this.count+=1000;
+            //给名为btnchange的事件，如果元素没有则注册，并且触发该事件且将this.count传入该事件 
+            this.$emit('btnchange',this.count);
+        },
+        handlereduce:function()
+        {
+            this.count-=1000;
+            this.$emit('btnchange',this.count);
+        }
+       }
+    });
+    var app=new Vue({
+        el:'#app',
+        data:{
+            total:2000
+        },
+        methods:{
+            totalmatch:function(count)
+            {
+               this.total=count;
+            }
+        }
+    })
+</script>
+
+</html>

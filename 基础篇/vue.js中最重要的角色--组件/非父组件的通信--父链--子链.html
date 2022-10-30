@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>非父组件的通信--父链--子链</title>
+</head>
+<body>
+    <div id="app">
+        <my-acomponent ref="a"></my-acomponent>
+        <my-bcomponent ref="b"></my-bcomponent>
+        <hr>
+        <child-component ref="c"></child-component>---{{msg}}<br>
+        <button @click="getChildData">我是父组件的按钮，我要拿到子组件的内容</button>
+    ---------------{{formchild}}
+    </div>
+</body>
+<script>
+    Vue.component('my-acomponent',{
+        template:'<div><button @click="handle">点击我向B组件传递数据</button></div>',
+        data:function(){
+            return{
+                aaa:'我是来自A组件的内容',
+                msg:'我是A中的msg'
+            }
+        },
+        methods:{
+            handle:function()
+            {
+                //触发lala事件，并传参
+                this.$root.bus.$emit('lala',this.aaa);
+            }
+        }
+    })
+
+    Vue.component('my-bcomponent',{
+        template:'<div>我是一个组件</div>',
+        data:function(){
+            return{
+               
+                msg:'我是B中的msg'
+            }
+        },
+        created:function(){
+            //A组件在实例创建的时候就监听事件--lala事件
+            //通过根元素访问中介
+            this.$root.bus.$on('lala',function(value){
+               alert(value);
+            });
+        }
+    })
+    Vue.component('child-component',{
+        template:'<button @click="setFatherData">通过点击我修改父亲的数据</button>',
+        data:function(){
+            return{
+               
+                msg:'我是C中的msg'
+            }
+        },
+        methods:{
+            setFatherData:function(){
+                this.$parent.msg='数据已经修改了'
+            }
+        }
+    })
+    var app=new Vue({
+        el:'#app',
+        data:{
+            bus:new Vue(),
+            msg:'数据还未修改',
+            formchild:'还未拿到'
+        },
+        methods:{
+            getChildData:function()
+            {
+                //用来拿子组件的内容 ---$refs
+                this.formchild= this.$refs.c.msg
+            }
+        }
+    })
+</script>
+</html>

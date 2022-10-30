@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>数据验证</title>
+</head>
+<body>
+    <div id="app">
+        <my-component my-msg="lalala"></my-component>
+        <hr>
+        <type-component :a="a" :b="b" :c="c" :d="d" :e="e" :f="ff"></type-component>
+    </div>
+</body>
+<script>
+   Vue.component("myComponent",{
+        props:['myMsg'],
+        template:'<div>我是一个组件{{msg}}</div>',
+        data:function(){
+            return{
+              msg:this.myMsg
+            }
+        }
+    });
+   Vue.component("typeComponent",{
+    //属性可指定类型
+    props:{
+        //类型限定为字符串
+        a:String,
+        //类型限定为字符串，数字
+        b:[String,Number],
+        //类型限定为布尔类型，默认值是true，type--required----defalut
+        c:{
+            type:Boolean,
+            default:true
+        },
+        d:{
+            type:Number,
+            //设置required为true，则该属性必须在元素上被传值
+            required:true
+        },
+        e:{
+            //类型限定为数组
+            type:Array,
+            //默认值返回为666
+            default:function(){
+                return [666];
+            }
+        },
+        //自定义一个验证函数
+        f:{
+          validator:function(value){
+             return value>10;
+          }
+        }
+    },
+    template:'<div>{{a}}---{{b}}---{{c}}---{{d}}---{{e[0]}}</div>',
+    data:function(){
+         return{
+            abc:this.myMsg
+         }
+    }
+   });
+   var app=new Vue({
+     el:'#app',
+     //全局变量用来赋值
+     data:{
+       a:'hello',
+       b:'wer',
+       c:true,
+       d:123,
+       e:[1,2,3],
+       ff:88
+     }
+   })
+</script>
+</html>
