@@ -4,9 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <title>插槽的简单介绍和作用域</title>
 </head>
 <body>
-    
+    <div id="app">
+        <!--父组件app作用域-->
+       <!-- <my-component v-show="childshow">
+          {{message}}
+       </my-component> -->
+       <my-component></my-component>
+    </div>
 </body>
+<script>
+    Vue.component('my-component',{
+        //子组件作用域
+        template:'<div v-show="childshow">{{message}}</div>',
+        data:function()
+        {
+            return{
+                message:'我是子组件的内容',
+                childshow:true
+            }
+        }
+    })
+    var app=new Vue({
+        el:'#app',
+        data:{
+            message:'我是父组件的内容',
+            childshow:true
+        }
+    })
+</script>
 </html>
