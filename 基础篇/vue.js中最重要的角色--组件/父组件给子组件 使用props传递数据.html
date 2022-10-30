@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>父组件给子组件 使用props传递数据</title>
+</head>
+<body>
+    <div id="app" style="border:2px solid chartreuse ;height: 360px;">
+       <h5 style="text-align:center">我是父组件</h5>
+       <!--通过props注册属性msg，然后给msg传值，让数据传递到子组件内容-->
+       <child-component msg="我是来自父组件的内容"></child-component>
+       <hr>使用v-bind进行数据的动态绑定---把input中的msg传递给子组件
+       <!--通过props注册属性msg，然后父组件绑定全局变量parentmsg，且子组件msg属性也绑定parentmsg，当用户在父组件修改parentmsg时候，也会将parentmsg传给子组件msg属性-->
+       <input type="text" v-model="parentmsg">
+       <bind-component v-bind:msg="parentmsg"></bind-component>
+    </div>
+</body>
+<script>
+    var app=new Vue({
+        el:'#app',
+        data:{
+            parentmsg:'今天的月亮真圆'
+        },
+        components:{
+            'child-component':{
+                props:['msg'],
+                template:'<div style="border:2px solid red;height:80px;">{{msg}}</div>',
+                data:function(){
+                    return{
+                        count:1
+                    }
+                }
+            },
+            'bind-component':{
+                props:['msg'],
+                template:'<div style="border:2px solid red;height:80px;">{{msg}}</div>',
+                data:function(){
+                    return{
+                        count:1
+                    }
+                }
+            }
+        }
+    })
+</script>
+</html>

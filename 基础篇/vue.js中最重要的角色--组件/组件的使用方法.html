@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>组件的使用方法</title>
+</head>
+
+<body>
+    <div id="app" style="border: 2px solid chartreuse;">
+        <my-component></my-component>
+        <app-component></app-component>
+    </div>
+    <div id="bpp" style="border: 2px solid red;">
+        <my-component></my-component>
+    </div>
+    <div id="cpp" style="border: 2px solid blue;">
+        <my-component></my-component>
+        table中只能由tr,td,tbody这些元素,但可以在tr,td,tbody中加入is属性以此植入自定义组件
+        <table>
+            <!-- <my-component></my-component> -->
+            <tbody is="my-component"></tbody>
+        </table>
+    </div>
+
+</body>
+<script>
+    //注册组件----全局注册，优点：所有的实例都可以使用，缺点：权限太大，容错率降低
+    Vue.component('my-component', {
+        template: '<div>我是一个全局组件</div>'
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        //局部注册，限制于#app元素中
+        components: {
+            'app-component': {
+                template: '<div>我是一个局部组件</div>'
+            }
+        }
+    })
+    var bpp = new Vue({
+        el: '#bpp',
+        data: {
+
+        }
+    })
+    var cpp = new Vue({
+        el: '#cpp',
+        data: {
+
+        }
+    })
+</script>
+
+</html>
