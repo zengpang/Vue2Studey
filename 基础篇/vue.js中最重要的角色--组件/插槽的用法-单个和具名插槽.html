@@ -36,15 +36,7 @@
             </slot>
             </div>`
     });
-    Vue.component('name-component',{
-        // template:'<div>我是子组件内容</div>' 不使用slot
-        template:`<div>
-            我是子组件内容<br>
-            <slot>
-                父组件未插入时，则显示默认内容
-            </slot>
-            </div>`
-    });
+  
     Vue.component('name-component',{
         // template:'<div>我是子组件内容</div>' 不使用slot
         //给slot元素添加name属性，使其变成具名插槽

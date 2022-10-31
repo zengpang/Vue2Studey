@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>作用域插槽</title>
+</head>
+
+<body>
+    <!--is属性值为组件名称，而在component元素中可以通过修改is属性值，更改绑定的组件，从而实现动态组件,-->
+    <div id="app">
+       <component :is="thisView">
+          
+       </component>
+       <button @click="handleView('A')">第一句</button>
+       <button @click="handleView('B')">第二句</button>
+       <button @click="handleView('C')">第三句</button>
+       <button @click="handleView('D')">第四句</button>
+    </div>
+</body>
+<script>
+    //需求通过点击不同的按钮切换不同的视图
+    Vue.component('compA',{
+        template: `<div>离离原上草</div>`
+    });
+    Vue.component('compB',{
+        template: `<div>一岁一枯荣</div>`
+    });
+    Vue.component('compC',{
+        template: `<div>野火烧不尽</div>`
+    });
+    Vue.component('compD',{
+        template: `<div>春风吹又生</div>`
+    });
+    var app = new Vue({
+        el: '#app',
+        data:{
+            thisView:'compA'
+        },
+        methods:{
+            handleView:function(tag)
+            {
+             this.thisView='comp'+tag;
+            }
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>动态组件的使用方法</title>
+</head>
+
+<body>
+    <!--作用域插槽获取在父组件作用域中获取子组件slot除name以外属性的属性值-->
+    <div id="app">
+       <my-component>
+          <!--作用域插槽在Vue.js 2.5版本之前只能在template元素中使用-->
+          <template slot="abc" slot-scope="prop">
+             {{prop.text}}
+             {{prop.ss}}
+          </template>
+           <!--作用域插槽在Vue.js 2.5版本之后可以在其他元素中使用-->
+          <p slot="abc" slot-scope="prop">
+            {{prop.text}}
+            {{prop.ss}}
+          </p>
+       </my-component>
+    </div>
+</body>
+<script>
+    Vue.component('my-component',{
+        template: `<div>
+            我是子组件内容<br>
+            <slot text="我是来自子组件的数据" ss="fadadada" name="abc">
+            </slot>
+            </div>`
+    });
+    var app = new Vue({
+        el: '#app'
+    })
+</script>
+
+</html>

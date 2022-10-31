@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>插槽的用法-单个和具名插槽</title>
+</head>
+<body>
+    <div id="app">
+       <!--正常情况下是子组件元素内部不显示父组件内容，要显示的话，必须使用slot插槽-->
+       <!--使用slot插槽之后，slot标签内容会自动被替换为父组件内容，如果没有父组件内容，则显示slot标签默认内容-->
+       <my-component>
+         {{msg}}
+       </my-component>
+       <hr>
+       具名插槽
+       <!--具名插槽存在的意义是为了父组件内容指定替换插槽-->
+       <!--在父组件内容元素中设置slot属性，根据slot属性，会选择name属性与其匹配的具名插槽，作为被替代的插槽-->
+       <name-component>
+          <h3 slot="header"><span>我是标题</span></h3>
+          <p>我是正文内容</p>
+          <p>正文内容有两段</p>
+          <p slot="footer">我是底部信息</p>
+       </name-component>
+    </div>
+</body>
+<script>
+    Vue.component('my-component',{
+        // template:'<div>我是子组件内容</div>' 不使用slot
+        template:`<div>
+            我是子组件内容<br>
+            <slot>
+                父组件未插入时，则显示默认内容
+            </slot>
+            </div>`
+    });
+  
+    Vue.component('name-component',{
+        // template:'<div>我是子组件内容</div>' 不使用slot
+        //给slot元素添加name属性，使其变成具名插槽
+        template:`<div>
+            我是子组件内容<br>
+            <div class="header">
+                <slot name="header">
+                </slot>
+            </div>
+            <div class="contatiner">
+                <slot name="contatiner">
+                </slot>
+            </div>
+            <div class="footer">
+                <slot name="footer">
+                </slot>
+            </div>
+            </div>`,
+            mounted:function(){
+                //访问插槽
+                //通过this.$slots.slot元素name属性值，获取指定插槽
+                var header=this.$slots.header;
+                var text=header[0].elm.innerText;
+                var html=header[0].elm.innerHTML;
+                console.log(header);
+                console.log(text);
+                console.log(html);
+            }
+    });
+
+    var app=new Vue({
+        el:'#app',
+        data:{
+           msg:'我是父组件内容'
+        }
+    })
+</script>
+</html>
