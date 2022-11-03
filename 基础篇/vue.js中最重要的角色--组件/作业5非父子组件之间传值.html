@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>作业5非父子组件之间传值</title>
+</head>
+
+<body>
+    <div id="app">
+        <componenta></componenta>
+        <componentb></componentb>
+    </div>
+</body>
+<script>
+    Vue.component('componenta', {
+        template: `<div>
+              <button v-on:click="btnclick">修改B组件值</button>
+              <div>{{appvalue}}</div>
+            </div>`,
+        data: function () {
+            return {
+                appvalue: '我是组件A的值',
+                changevalue:'组件B修改之后的值'
+            };
+        },
+        methods: {
+            btnclick: function () {
+              this.$root.neurogen.$emit('valuechange',this.changevalue);
+            }
+        }
+
+    }
+
+    );
+    Vue.component('componentb', {
+        template: `<div>
+            
+              <div >{{appvalue}}</div>
+            </div>`,
+        data: function () {
+            return {
+                appvalue: '我是组件B的值',
+             
+            };
+        },
+        
+        created:function()
+        {
+            self=this;
+            this.$root.neurogen.$on('valuechange',function(changevalue){
+                self.appvalue=changevalue;
+            });
+        }
+
+    }
+    );
+    var app = new Vue({
+        el: '#app',
+        data: {
+            value: '我是父组件的值',
+            neurogen:new Vue()
+           
+            
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>作业2全局注册和局部注册组件</title>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <app-component></app-component>
+    </div>
+</body>
+<script>
+    Vue.component('my-component',{
+        template:'<div>我是全局组件</div>'
+    }
+    )
+    var app=new Vue({
+        el:'#app',
+        components:{
+           'app-component':{
+            template:'<div>我是局部组件</div>'
+           }
+        }
+    })
+</script>
+</html>

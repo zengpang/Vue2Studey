@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>作业4子组件给父组件传递信息</title>
+</head>
+<body>
+    <div id="app">
+        <my-component v-model="value"></my-component>
+        <div>{{value}}</div>
+    </div>
+</body>
+<script>
+    Vue.component('my-component',{
+       
+        template:'<button v-on:click="btnclick">修改父组件值</button>',
+        data:function(){
+            return{
+                appvalue:'修改之后的值'
+            };
+        },
+        methods:{
+            btnclick:function()
+            {
+                
+                this.$emit('input',this.appvalue);
+            }
+        }
+       
+    }
+    )
+    var app=new Vue({
+        el:'#app',
+        data:{
+            value:'我是父组件的值'
+        }
+    })
+</script>
+</html>
