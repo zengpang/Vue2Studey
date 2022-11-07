@@ -9,32 +9,49 @@
 </head>
 <body>
     <div id="app">
-       <child></child>
+       <child :level="level">
+         我是蜡笔小新
+       </child>
        
     </div>
-    <!--组件child的html模板,并且注意-->
-    <template id="hdom">
+    <!--使用template元素在html中定制组件child的html模板,并且注意组件html模板-->
+    <!-- <template id="hdom">
         <div>
         <h1 v-if="level==1">
            <slot></slot>
         </h1>
-        <h1 v-if="level==2">
+        <h2 v-if="level==2">
             <slot></slot>
-        </h1>
-        <h1 v-if="level==3">
+        </h2>
+        <h3 v-if="level==3">
             <slot></slot>
-        </h1>
+        </h3>
         <div>
-    </template>
+    </template> -->
 </body>
 <script>
+    // 使用Vue组件定义
+    // Vue.component('child',{
+    //     //属性
+    //     props:['level'],
+    //     //通过组件id引用
+    //     template:'#hdom'
+    // })
+
+    //使用render函数进行定义组件
     Vue.component('child',{
-        props:['level'],
-        //通过组件id引用
-        template:'#hdom'
+        render:function(createElement)
+        {
+            console.log(this.$slots.default);
+            return createElement('h'+this.level,this.$slots.default);
+        },
+        props:['level']
     })
     var app=new Vue({
-     
+       el:'#app',
+       data:{
+        level:3
+       }
     })
 </script>
 </html>
