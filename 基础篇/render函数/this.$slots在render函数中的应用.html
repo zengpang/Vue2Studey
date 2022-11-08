@@ -9,33 +9,29 @@
 </head>
 <body>
     <div id="app">
-       <child></child>
+       <my-component>
+         <p>锄禾日当午</p>
+         <p>汗滴禾下土</p>
+         <H3 slot="header">我是标题</H3>
+         <H3 slot="footer">我是文章的最后一段</H3>
+       </my-component>
     </div>
 </body>
 <script>
     Vue.component('child',{
-        //---第一个参数必选
-        //string--html标签
-        //Object--一个含有数据选项的对象
-        //function--方法返回含有数据选项的对象
+    
         render:function(createElement)
         {
-            return createElement({
-                template:`<div>
-                        <h1>锄禾日当午</h1>
-                        </div>`
-            });
-            //函数参数
-            // var domFun=function(){
-            //     return{
-            //         //返回对象
-            //         template:`<div>
-            //             <h1>锄禾日当午</h1>
-            //             </div>`
-            //     }
+            var header=this.$slots.header;//--这返回的内容就是含有=VNODE的数组
+            var main=this.$slots.default;
+            var footer=this.$slots.footer;
+            return createElement('my-component',[
+                createElement('header',header),
+                createElement('main',main),
+                createElement('footer',footer)
 
-            // }
-            // return createElement(domFun());
+            ]);
+   
 
         }
     });
