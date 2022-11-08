@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>render函数的第二个参数</title>
+</head>
+<body>
+    <div id="app">
+      <child></child>
+    </div>
+</body>
+<script>
+    Vue.component('child',{
+        //----第二个参数可选，第二个参数是数据对象----只能是Object
+        render:function(createElement)
+        {
+            return createElement({
+                template:'<div>龙的传人</div>'
+            },{
+                'class':{
+                    //启用名字为foo class，关闭名字为baz class
+                    foo:true,
+                    baz:false
+                },
+                //样式
+                style:{
+                    color:'red',
+                    fontSize:'16px'
+                },
+                //正常的html特性
+                attrs:{
+                    //id属性
+                    id:'fooid',
+                    //链接属性
+                    src:'https://www.bilibili.com/'
+
+                },
+                //用来写原生的DOM属性
+                domProps:{
+                    //设置插入的HTML属性
+                    innerHTML:'<span style="color:blue;font-size:18px">我是蓝色</span>'
+                }
+            })
+        }
+    });
+    var app=new Vue({
+        el:'#app'
+    })
+</script>
+</html>
