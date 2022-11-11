@@ -12,7 +12,9 @@
         <!--修改自定义组件中的input组件内容，全局变量name也会发生变化，然后页面上的全局变量也会发生变化-->
         <!--具体过程如下-->
         <!--绑定自定义属性name,并给自定义属性传入全局变量name,并给子组件input事件绑定全局方法showName-->
-        <my-component :name="name" @input="showName"></my-component>
+        <!-- 方法1: <my-component :name="name" @input="showName"></my-component> -->
+        <!--语法糖v-model---其实就是绑定了input事件，当触发input时候，input事件就会自动接收传递过来的参数，并赋值给已经绑定的全局变量name-->
+        <my-component :name="name" v-model="name"></my-component>
         <br>{{name}}
     </div>
 </body>
@@ -49,11 +51,13 @@
       //定义全局变量
       name:'JACK'
     },
+    //全局方法
     methods:{
-        showName:function(value)
-        {
-            this.name=value;
-        }
+        //方法一
+        // showName:function(value)
+        // {
+        //     this.name=value;
+        // }
     }
    })
 </script>

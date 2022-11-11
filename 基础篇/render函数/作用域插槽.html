@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>作用域插槽</title>
+</head>
+<body>
+    <div id="app">
+        <my-component>
+            <!--scope属性上绑定变量名，即可声明该变量。父组件可通过该变量获取子组件中声明的作用域插槽数据-->
+           <template scope="prop">
+                {{prop.text}}<br>
+                {{prop.msg}}
+           </template>
+        </my-component>
+    </div>
+</body>
+<script>
+   Vue.component('my-component',{
+      render:function(createElement)
+      {
+        //scopedSlots可让父组件通过作用域插槽获取子组件数据
+        return createElement('div',this.$scopedSlots.default({
+            //设置默认值并声明
+            //相当于<div><slot :text="text"></slot></div>
+            text:'我是子组件传递过来的数据',
+            msg:'scopetext'
+        }))
+      }
+   });
+   var app=new Vue({
+     el:'#app',
+     data:{
+
+     }
+   })  
+</script>
+</html>
