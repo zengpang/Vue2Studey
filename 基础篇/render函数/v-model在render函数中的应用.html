@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>v-model在render函数中的应用</title>
+</head>
+<body>
+    <div id="app">
+        <!--修改自定义组件中的input组件内容，全局变量name也会发生变化，然后页面上的全局变量也会发生变化-->
+        <!--具体过程如下-->
+        <!--绑定自定义属性name,并给自定义属性传入全局变量name,并给子组件input事件绑定全局方法showName-->
+        <my-component :name="name" @input="showName"></my-component>
+        <br>{{name}}
+    </div>
+</body>
+<script>
+   Vue.component('my-component',{
+     render:function(createElement)
+     {
+        var self=this;
+        return createElement('input',{
+          //设置元素属性
+          domProps:{
+            value:self.name
+          },
+          //绑定事件
+          on:{
+            //绑定input事件
+            input:function(event)
+            {
+                //此处的this指的是什么？指的是function
+                //触发组件input事件，并传参给input事件上绑定的方法
+                self.$emit('input',event.target.value);
+
+            }
+          }
+        })
+     },
+     //定义一个name属性
+     props:['name'],
+   
+   })
+   var app=new Vue({
+    el:'#app',
+    data:{
+      //定义全局变量
+      name:'JACK'
+    },
+    methods:{
+        showName:function(value)
+        {
+            this.name=value;
+        }
+    }
+   })
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <title>通过props在render函数传递数据</title>
+</head>
+<body>
+    <div id="app">
+      <button @click="switchShow">点击切换图片</button>{{show}}
+      <my-component :show="show">
+
+      </my-component>
+    </div>
+</body>
+<script>
+   //需求：点击按钮切换美女图片
+   Vue.component('my-component',
+   {
+    props:['show'],
+    render:function(createElement)
+    {
+        var imgsrc;
+        if(this.show)
+        {
+            imgsrc='../Resource/Img/黎明卿1.jpg';
+        }
+        else
+        {
+            imgsrc='../Resource/Img/黎明卿2.jpg';
+        }
+        return createElement('img',{
+            attrs:{
+                src:imgsrc,
+                
+            },
+            style:{
+                height:'500px',
+                width:'700px'
+            }
+        });
+    }
+   });
+   var app=new Vue({
+    el:'#app',
+    data:{
+        show:false
+
+    },
+    methods:{
+        switchShow:function()
+        {
+            this.show=!this.show;
+        }
+    }
+   });
+</script>
+</html>
